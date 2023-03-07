@@ -5,8 +5,10 @@
         class="header__wrapper wrap row justify-end items-center"
         v-for="component in components"
         :key="component.id"
+        :class="{ 'header__wrapper_selected': component.component === currentComponent}"
+        @click="switchComponent(component.component)"
       >
-        <div class="header__item" @click="switchComponent(component.component)">
+        <div class="header__item">
           {{ component.title }}
         </div>
       </div>
@@ -14,7 +16,6 @@
     <div class="content">
       <div class="content__wrapper">
         <component
-          class="content__item"
           :is="currentComponent + 'Component'">
         </component>
       </div>
@@ -48,17 +49,17 @@ export default defineComponent({
       components: [
         {
           id: 0,
-          title: 'Projects',
+          title: 'Мои проекты',
           component: 'Projects'
         },
         {
           id: 1,
-          title: 'About Me',
+          title: 'Обо мне',
           component: 'About'
         },
         {
           id: 2,
-          title: 'Contacts',
+          title: 'Контакты',
           component: 'Contacts'
         }
       ]
@@ -75,18 +76,26 @@ export default defineComponent({
 .header
   height: 9vh
   background: #9C27B0
+  &__wrapper
+    &:hover
+      cursor: pointer
+    &_selected
+        background: red
   &__item
     padding: 0 24px
     font-family: "Gotham Pro", serif
-    font-weight: 500
-    &:hover
-      cursor: pointer
+    font-weight: 700
 .content
   height: 82vh
   background: #21BA45
+  &__wrapper
+    padding: 8px
 .footer
   height: 9vh
   background: red
   &__info
     padding: 0 24px
+    font-family: "Gotham Pro",serif
+    font-weight: 400
+    font-size: 12px
 </style>
